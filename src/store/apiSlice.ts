@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
   reducerPath: 'api',
@@ -10,6 +10,6 @@ export const apiSlice = createApi({
       query: () => '/',
     }),
   }),
-})
+});
 
-export const { useCallJobApplicationServiceQuery } = apiSlice
+export const { useCallJobApplicationServiceQuery } = apiSlice;

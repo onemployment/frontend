@@ -14,6 +14,7 @@ This repository contains the frontend application for the OnEmployment platform,
 ## Patterns
 
 ### SOLID Principles
+
 - **Single Responsibility Principle**: Each component and function should have a single, well-defined purpose
 - **Open/Closed Principle**: Components should be open for extension but closed for modification
 - **Liskov Substitution Principle**: Derived components should be substitutable for their base components
@@ -21,6 +22,7 @@ This repository contains the frontend application for the OnEmployment platform,
 - **Dependency Inversion Principle**: Depend on abstractions, not concretions
 
 ### Additional Patterns
+
 - **Component Composition**: Favor composition over inheritance for React components
 - **Custom Hooks**: Extract reusable logic into custom hooks
 - **Container/Presentational Pattern**: Separate data logic from presentation logic
@@ -31,6 +33,7 @@ This repository contains the frontend application for the OnEmployment platform,
 ## Commit Message Rules
 
 ### Format
+
 ```
 <imperative title>
 
@@ -40,6 +43,7 @@ This repository contains the frontend application for the OnEmployment platform,
 ```
 
 ### Guidelines
+
 - Commit title should be imperative and concise (50 characters or less)
 - Use bullet points in description to list important changes
 - Explain what changed and briefly why
@@ -47,6 +51,7 @@ This repository contains the frontend application for the OnEmployment platform,
 - Keep bullet points concise and focused
 
 ### Example
+
 ```
 Add user authentication flow
 
@@ -56,20 +61,35 @@ Add user authentication flow
 - Add form validation to prevent invalid submissions
 ```
 
+## Commit Workflow
+
+When preparing to commit changes, follow this standardized workflow:
+
+1. **Review commit template**: Reference the commit message rules above
+2. **Analyze local changes**: Compare current branch changes with the remote branch to understand what has been modified
+3. **Prepare commit message**: Create a commit message following the Commit Template Rules with:
+   - Concise imperative title summarizing the change
+   - Bullet points detailing specific modifications made
+4. **Execute commit and push**: Stage all changes, commit with the exact prepared message, and push to the current branch's remote
+
 ## Issue Template
 
 ### What
+
 Describe what needs to be done or what problem needs to be solved.
 
 ### Why
+
 Explain the business value, user need, or technical necessity behind this issue.
 
 ### How
+
 Outline the general approach or solution strategy for addressing this issue.
 
 ### Implementation Plan
+
 - [ ] Specific task 1
-- [ ] Specific task 2  
+- [ ] Specific task 2
 - [ ] Specific task 3
 - [ ] Testing and validation
 - [ ] Documentation updates
