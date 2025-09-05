@@ -1,4 +1,8 @@
-# React + TypeScript + Vite
+# onemployment Frontend
+
+React TypeScript application for the onemployment platform, providing user interfaces for job seekers and employers.
+
+## Development
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -67,3 +71,13 @@ export default tseslint.config([
   },
 ]);
 ```
+
+## CI/CD
+
+Automated deployment via GitHub Actions to AWS S3/CloudFront:
+
+- **Trigger**: Push to `main` branch
+- **Pipeline**: lint → format → build → deploy to S3 → CloudFront invalidation
+- **Production URL**: https://www.onemployment.org
+- **API Integration**: https://api.onemployment.org
+- **Authentication**: GitHub OIDC (no long-lived keys)

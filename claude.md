@@ -72,6 +72,8 @@ When preparing to commit changes, follow this standardized workflow:
    - Bullet points detailing specific modifications made
 4. **Execute commit and push**: Stage all changes, commit with the exact prepared message, and push to the current branch's remote
 
+**Important**: Always use direct git access for committing code (git add, git commit, git push) rather than GitHub API operations for better control over git history and commit management.
+
 ## Issue Template
 
 ### What
