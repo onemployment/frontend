@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './App.css';
 
 function App() {
+  const navigate = useNavigate();
   const [currentLetter, setCurrentLetter] = useState('O');
   const [showButton, setShowButton] = useState(false);
 
@@ -50,7 +52,7 @@ function App() {
               duration: 0.8,
               ease: [0.22, 1, 0.36, 1],
             }}
-            onClick={() => console.log('Get Started clicked')}
+            onClick={() => navigate('/login')}
           >
             Get Started
           </motion.button>
