@@ -1,30 +1,30 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useStore } from 'react-redux';
+import type { RootState } from '../store';
+import { useLogoutMutation } from '../store/apiSlice';
+import { createLandingBindings } from './landingBindings';
 import './Landing.css';
 
 function Landing() {
-  const [username, setUsername] = useState<string | null>(null);
   const navigate = useNavigate();
+  const store = useStore<RootState>();
+  const [logoutMutation] = useLogoutMutation();
 
-  useEffect(() => {
-    const u = localStorage.getItem('onemployment:username');
-    setUsername(u);
-  }, []);
-
-  const logout = () => {
-    localStorage.removeItem('onemployment:username');
-    navigate('/login');
-  };
+  const { currentUser, handleLogout } = createLandingBindings({
+    getState: () => store.getState(),
+    logout: () => logoutMutation().unwrap(),
+    navigate,
+  });
 
   return (
     <div className="Landing">
       <header className="landing-header">
-        <div className="brand">Onemployment</div>
+        <div className="brand">onemployment</div>
         <div className="header-right">
-          {username ? (
-            <span className="welcome">Welcome {username}</span>
+          {currentUser ? (
+            <span className="welcome">Welcome {currentUser.username}</span>
           ) : null}
-          <button className="logout-btn" onClick={logout}>
+          <button className="logout-btn" onClick={handleLogout}>
             Log out
           </button>
         </div>

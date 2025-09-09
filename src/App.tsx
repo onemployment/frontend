@@ -5,11 +5,11 @@ import './App.css';
 
 function App() {
   const navigate = useNavigate();
-  const [currentLetter, setCurrentLetter] = useState('O');
+  const [currentLetter, setCurrentLetter] = useState('o');
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
-    const sequence = ['O', 'U', 'O'];
+    const sequence = ['o', 'u', 'o'];
     let currentIndex = 0;
 
     const timer = setInterval(() => {

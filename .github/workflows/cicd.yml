@@ -40,6 +40,9 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Unit tests
+        run: npm run test
+
   cd:
     name: Continuous Deployment
     runs-on: ubuntu-latest

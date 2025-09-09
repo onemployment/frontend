@@ -1,83 +1,56 @@
 # onemployment Frontend
 
-React TypeScript application for the onemployment platform, providing user interfaces for job seekers and employers.
+React + TypeScript application for the onemployment platform.
 
-## Development
+## Tech Stack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- React 19, Vite 7, TypeScript 5
+- Redux Toolkit, React Router
+- Vitest for unit tests
+- ESLint (typescript-eslint) + Prettier
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 20
 
-## Expanding the ESLint configuration
+## Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Install dependencies: `npm ci`
+- Environment variables:
+  - `VITE_API_URL` — Backend API base URL (not the Vite dev server). In development, if omitted, the app falls back to `http://localhost:3000` per `src/config.ts`.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Example `.env.development` (API on port 3000):
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```
+VITE_API_URL=http://localhost:3000
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Example `.env.production`:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
 ```
+VITE_API_URL=https://api.onemployment.org
+```
+
+Note: The frontend dev server runs on `http://localhost:5173` (see `vite.config.ts`). Do not set `VITE_API_URL` to the Vite URL; it must point to the backend API.
+
+## Scripts
+
+- `npm run dev` — Start dev server (HMR) on `http://localhost:5173`
+- `npm run build` — Type-check and build to `dist/`
+- `npm run preview` — Preview the production build
+- `npm run test` — Run unit tests (Vitest)
+- `npm run test:watch` — Watch mode for tests
+- `npm run lint` — Lint source files
+- `npm run format:check` / `npm run format` — Prettier check/fix
 
 ## CI/CD
 
-Automated deployment via GitHub Actions to AWS S3/CloudFront:
+- GitHub Actions on push to `main`
+- CI: install → lint → format check → build → unit tests
+- CD: build → deploy to AWS S3 (`www.onemployment.org`) → CloudFront invalidation of `/index.html`
+- Auth via GitHub OIDC (no long‑lived AWS keys)
 
-- **Trigger**: Push to `main` branch
-- **Pipeline**: lint → format → build → deploy to S3 → CloudFront invalidation
-- **Production URL**: https://www.onemployment.org
-- **API Integration**: https://api.onemployment.org
-- **Authentication**: GitHub OIDC (no long-lived keys)
+## Production
+
+- App: https://www.onemployment.org
+- API: https://api.onemployment.org

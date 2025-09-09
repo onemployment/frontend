@@ -52,6 +52,27 @@
   background: #ffffff;
   color: #111827;
   outline: none;
+  /* Reserve space for possible validation messages below without shifting layout */
+  margin-bottom: 24px;
+}
+
+/* Field wrapper to control spacing between input and messages */
+.auth-form .field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inside field wrapper, reset input margin to rely on field-messages spacing */
+.auth-form .field input[type='text'],
+.auth-form .field input[type='email'],
+.auth-form .field input[type='password'] {
+  margin-bottom: 0;
+}
+
+/* Reserved area for validation hints/errors; prevents layout shift */
+.auth-form .field-messages {
+  min-height: 18px; /* enough for one line at ~0.7-0.75rem */
+  margin-top: 10px; /* exact visual gap from input to message */
 }
 
 .auth-form input:focus {
@@ -68,7 +89,53 @@
 
 .field-error {
   color: #b91c1c; /* red-700 */
-  font-size: 0.9rem;
+  font-size: 0.75rem; /* reduced ~20% and rounded up */
+  margin-top: 2px; /* closer to the input */
+}
+
+/* Subtle inline helper text for validation hints */
+.field-hint {
+  margin-top: 2px; /* default; overridden in field-messages */
+  font-size: 0.7rem; /* reduced ~20% and rounded up */
+  line-height: 1.2;
+  color: #4b5563; /* gray-600 default */
+}
+
+/* Inside reserved area, remove extra top margins so gap stays 10px */
+.auth-form .field-messages .field-hint,
+.auth-form .field-messages .field-error {
+  margin-top: 0;
+}
+
+.field-hint.success {
+  color: #059669; /* green-600 */
+}
+
+.field-hint.error {
+  color: #b91c1c; /* red-700 */
+}
+
+/* Suggestions group layout */
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Suggestion buttons: same rounded shape as submit, light gray coloring */
+.suggestion-btn {
+  padding: 6px 12px;
+  background-color: #f3f4f6; /* gray-100 */
+  color: #111827; /* near-black text */
+  border: 1px solid #e5e7eb; /* gray-200 */
+  border-radius: 18px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.suggestion-btn:hover {
+  background-color: #e5e7eb; /* gray-200 */
 }
 
 .auth-submit-btn {
