@@ -2,7 +2,7 @@
 
 ## Repository Overview
 
-This repository contains the frontend application for the OnEmployment platform, providing the user interface and client-side functionality for job seekers and employers.
+This repository contains the frontend application for the onemployment platform, providing the user interface and client-side functionality for job seekers and employers.
 
 - React.js or Next.js for component-based UI development
 - TypeScript for type safety and better developer experience
