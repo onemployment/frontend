@@ -4,7 +4,7 @@
 
 **Purpose**: React/TypeScript user interface providing modern, responsive UI for job seekers and employers
 **Current Status**: 🏗️ In development with React 19 and modern toolchain
-**Key Technologies**: React 19, TypeScript, Redux Toolkit, Vite, Tailwind CSS, Framer Motion, React Query
+**Key Technologies**: React 19, TypeScript, Redux Toolkit, Vite, Material-UI (MUI), Framer Motion, React Query
 
 **Production Environment**:
 
@@ -58,18 +58,20 @@ npm run test               # Unit tests (when available)
 ```
 src/
 ├── components/            # Reusable UI components
-│   ├── ui/               # Basic UI components (buttons, inputs, etc.)
-│   ├── forms/            # Form components with validation
-│   ├── layout/           # Layout components (header, footer, nav)
-│   └── features/         # Feature-specific components
+│   ├── forms/            # Form components with MUI wrappers (FormField)
+│   ├── layout/           # Layout components (AuthLayout, headers, nav)
+│   └── features/         # Feature-specific components (planned)
 ├── pages/                # Route-based page components
-├── hooks/                # Custom React hooks
+├── features/             # Feature modules with business logic
+│   └── auth/             # Authentication feature
+│       ├── adapters/     # API integration layer
+│       ├── controllers/  # Business logic handlers
+│       ├── forms/        # Form validation logic
+│       └── utils/        # Feature-specific utilities
 ├── store/                # Redux Toolkit store configuration
-│   ├── slices/           # Redux slices for different features
-│   └── api/              # RTK Query API endpoints
-├── utils/                # Utility functions and helpers
-├── types/                # TypeScript type definitions
-├── styles/               # Global styles and Tailwind configuration
+│   └── apiSlice.ts       # RTK Query API endpoints
+├── theme/                # MUI theme configuration and providers
+├── routes/               # React Router configuration
 └── App.tsx               # Root application component
 ```
 
@@ -161,7 +163,7 @@ src/
 ### Development Workflow
 
 1. **Follow component patterns**: Use existing components in `src/components/` as reference
-2. **Implement responsive design**: Use Tailwind CSS with mobile-first approach
+2. **Implement responsive design**: Use MUI responsive breakpoints and sx prop with mobile-first approach
 3. **Add type safety**: Define TypeScript interfaces for all props and data
 4. **Handle loading states**: Implement proper loading and error states for async operations
 5. **Follow validation sequence**: lint → type-check → build → test before committing
@@ -171,8 +173,8 @@ src/
 - **Props Interface**: Define clear TypeScript interfaces for all component props
 - **Default Props**: Use destructuring with default values instead of defaultProps
 - **Event Handling**: Use proper event types (React.MouseEvent, React.FormEvent)
-- **Styling**: Use Tailwind CSS classes with conditional styling patterns
-- **Accessibility**: Include ARIA labels, semantic HTML, and keyboard navigation
+- **Styling**: Use MUI components with sx prop for custom styling and theme integration
+- **Accessibility**: Include ARIA labels, semantic HTML, and keyboard navigation (MUI components include built-in accessibility)
 
 ### State Management Guidelines
 
@@ -216,9 +218,10 @@ npm run format            # Format code with Prettier
 ```bash
 src/App.tsx               # Main application component
 src/main.tsx              # Application entry point
-src/components/ui/        # Reusable UI components
+src/components/forms/     # MUI form wrapper components
+src/components/layout/    # MUI layout components
+src/theme/                # MUI theme configuration
 src/store/                # Redux store configuration
-tailwind.config.js        # Tailwind CSS configuration
 vite.config.ts            # Vite build configuration
 ```
 
@@ -232,7 +235,7 @@ https://www.onemployment.org  # Production deployment
 ### Debugging & Troubleshooting
 
 - **Build Errors**: Check TypeScript compilation with `npm run type-check`
-- **Styling Issues**: Verify Tailwind CSS classes and configuration
+- **Styling Issues**: Verify MUI component props and theme configuration
 - **State Issues**: Use Redux DevTools browser extension
 - **Network Issues**: Check browser DevTools Network tab for API calls
 - **Performance Issues**: Use React DevTools Profiler

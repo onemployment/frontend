@@ -5,6 +5,7 @@ React + TypeScript application for the onemployment platform.
 ## Tech Stack
 
 - React 19, Vite 7, TypeScript 5
+- Material-UI (MUI) for component library and theming
 - Redux Toolkit, React Router
 - Vitest for unit tests
 - ESLint (typescript-eslint) + Prettier

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Typography, Button, Box, Link as MuiLink, Chip } from '@mui/material';
 import {
   useRegisterMutation,
   useLazyValidateEmailQuery,
@@ -9,7 +10,8 @@ import {
 import { createRegisterSubmit } from '../features/auth/controllers/registerController';
 import { getFirstFieldError } from '../features/auth/utils/validationMapping';
 import { debounce } from '../features/auth/utils/debounce';
-import './Auth.css';
+import { AuthLayout } from '../components/layout/AuthLayout';
+import { FormField } from '../components/forms/FormField';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -119,172 +121,171 @@ function RegisterPage() {
   };
 
   return (
-    <div className="Auth">
-      <div className="auth-card">
-        <h1 className="auth-title">onemployment</h1>
-        <form className="auth-form" onSubmit={onSubmit} noValidate>
-          <label htmlFor="email">Email</label>
-          <div className="field">
-            <input
-              id="email"
-              name="email"
-              type="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                debouncedCheckEmail(e.target.value.trim().toLowerCase());
-              }}
-              aria-invalid={Boolean(getFirstFieldError('email', fieldErrors))}
-            />
-            <div className="field-messages">
-              {getFirstFieldError('email', fieldErrors) && (
-                <div className="field-error">
-                  {getFirstFieldError('email', fieldErrors)}
-                </div>
-              )}
-              {emailHint && !getFirstFieldError('email', fieldErrors) && (
-                <div
-                  className={`field-hint ${emailAvailable ? 'success' : emailAvailable === false ? 'error' : ''}`}
-                >
-                  {emailHint}
-                </div>
-              )}
-            </div>
-          </div>
+    <AuthLayout>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        align="center"
+        sx={{ fontWeight: 'bold' }}
+      >
+        onemployment
+      </Typography>
 
-          <label htmlFor="password">Password</label>
-          <div className="field">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="new-password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              aria-invalid={Boolean(
-                getFirstFieldError('password', fieldErrors)
-              )}
-            />
-            <div className="field-messages">
-              {getFirstFieldError('password', fieldErrors) && (
-                <div className="field-error">
-                  {getFirstFieldError('password', fieldErrors)}
-                </div>
-              )}
-            </div>
-          </div>
+      <Box component="form" onSubmit={onSubmit} noValidate>
+        <FormField
+          name="email"
+          type="email"
+          label="Email"
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            debouncedCheckEmail(e.target.value.trim().toLowerCase());
+          }}
+          fieldErrors={
+            getFirstFieldError('email', fieldErrors)
+              ? [getFirstFieldError('email', fieldErrors) as string]
+              : undefined
+          }
+          autoComplete="email"
+          required
+          helperText={
+            emailHint && !getFirstFieldError('email', fieldErrors)
+              ? emailHint
+              : undefined
+          }
+          color={
+            emailAvailable === true
+              ? 'success'
+              : emailAvailable === false
+                ? 'error'
+                : 'primary'
+          }
+        />
 
-          <label htmlFor="username">Username</label>
-          <div className="field">
-            <input
-              id="username"
-              name="username"
-              type="text"
-              autoComplete="username"
-              required
-              value={username}
-              onChange={(e) => {
-                const v = e.target.value;
-                setUsername(v);
-                debouncedCheckUsername(v.trim());
-              }}
-              aria-invalid={Boolean(
-                getFirstFieldError('username', fieldErrors)
-              )}
-            />
-            <div className="field-messages">
-              {getFirstFieldError('username', fieldErrors) && (
-                <div className="field-error">
-                  {getFirstFieldError('username', fieldErrors)}
-                </div>
-              )}
-              {!getFirstFieldError('username', fieldErrors) && usernameHint && (
-                <div
-                  className={`field-hint ${usernameAvailable ? 'success' : usernameAvailable === false ? 'error' : ''}`}
-                >
-                  {usernameHint}
-                </div>
-              )}
-              {usernameSuggestions.length > 0 && (
-                <div className="field-hint suggestions">
-                  Suggestions:
-                  {usernameSuggestions.map((s) => (
-                    <button
-                      key={s}
-                      type="button"
-                      onClick={() => setUsername(s)}
-                      className="suggestion-btn"
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+        <FormField
+          name="password"
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          fieldErrors={
+            getFirstFieldError('password', fieldErrors)
+              ? [getFirstFieldError('password', fieldErrors) as string]
+              : undefined
+          }
+          autoComplete="new-password"
+          required
+        />
 
-          <label htmlFor="firstName">First name</label>
-          <div className="field">
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              required
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              aria-invalid={Boolean(
-                getFirstFieldError('firstName', fieldErrors)
-              )}
-            />
-            <div className="field-messages">
-              {getFirstFieldError('firstName', fieldErrors) && (
-                <div className="field-error">
-                  {getFirstFieldError('firstName', fieldErrors)}
-                </div>
-              )}
-            </div>
-          </div>
+        <FormField
+          name="username"
+          type="text"
+          label="Username"
+          value={username}
+          onChange={(e) => {
+            const v = e.target.value;
+            setUsername(v);
+            debouncedCheckUsername(v.trim());
+          }}
+          fieldErrors={
+            getFirstFieldError('username', fieldErrors)
+              ? [getFirstFieldError('username', fieldErrors) as string]
+              : undefined
+          }
+          autoComplete="username"
+          required
+          helperText={
+            !getFirstFieldError('username', fieldErrors) && usernameHint
+              ? usernameHint
+              : undefined
+          }
+          color={
+            usernameAvailable === true
+              ? 'success'
+              : usernameAvailable === false
+                ? 'error'
+                : 'primary'
+          }
+        />
 
-          <label htmlFor="lastName">Last name</label>
-          <div className="field">
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              required
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              aria-invalid={Boolean(
-                getFirstFieldError('lastName', fieldErrors)
-              )}
-            />
-            <div className="field-messages">
-              {getFirstFieldError('lastName', fieldErrors) && (
-                <div className="field-error">
-                  {getFirstFieldError('lastName', fieldErrors)}
-                </div>
-              )}
-            </div>
-          </div>
+        {usernameSuggestions.length > 0 && (
+          <Box sx={{ mb: 2 }}>
+            <Typography variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
+              Suggestions:
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+              {usernameSuggestions.map((s) => (
+                <Chip
+                  key={s}
+                  label={s}
+                  onClick={() => setUsername(s)}
+                  sx={{
+                    backgroundColor: '#f3f4f6',
+                    color: '#111827',
+                    border: '1px solid #e5e7eb',
+                    '&:hover': {
+                      backgroundColor: '#e5e7eb',
+                    },
+                  }}
+                />
+              ))}
+            </Box>
+          </Box>
+        )}
 
-          {formError && <div className="field-error">{formError}</div>}
+        <FormField
+          name="firstName"
+          type="text"
+          label="First name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+          fieldErrors={
+            getFirstFieldError('firstName', fieldErrors)
+              ? [getFirstFieldError('firstName', fieldErrors) as string]
+              : undefined
+          }
+          required
+        />
 
-          <button
-            className="auth-submit-btn"
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Creating…' : 'Create Account'}
-          </button>
-        </form>
-        <div className="auth-switch">
-          Already have an account? <Link to="/login">Log in</Link>
-        </div>
-      </div>
-    </div>
+        <FormField
+          name="lastName"
+          type="text"
+          label="Last name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+          fieldErrors={
+            getFirstFieldError('lastName', fieldErrors)
+              ? [getFirstFieldError('lastName', fieldErrors) as string]
+              : undefined
+          }
+          required
+        />
+
+        {formError && (
+          <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+            {formError}
+          </Typography>
+        )}
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          disabled={isLoading}
+          sx={{ mt: 3, mb: 2 }}
+        >
+          {isLoading ? 'Creating…' : 'Create Account'}
+        </Button>
+
+        <Typography align="center">
+          Already have an account?{' '}
+          <MuiLink component={Link} to="/login">
+            Log in
+          </MuiLink>
+        </Typography>
+      </Box>
+    </AuthLayout>
   );
 }
 

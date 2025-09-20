@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { Typography, Button, Box, Link as MuiLink } from '@mui/material';
 import { useLoginMutation } from '../store/apiSlice';
 import { createLoginSubmit } from '../features/auth/controllers/loginController';
 import { getFirstFieldError } from '../features/auth/utils/validationMapping';
-import './Auth.css';
+import { AuthLayout } from '../components/layout/AuthLayout';
+import { FormField } from '../components/forms/FormField';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -25,59 +27,72 @@ function LoginPage() {
   };
 
   return (
-    <div className="Auth">
-      <div className="auth-card">
-        <h1 className="auth-title">onemployment</h1>
-        <form className="auth-form" onSubmit={onSubmit} noValidate>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            aria-invalid={Boolean(getFirstFieldError('email', fieldErrors))}
-          />
-          {getFirstFieldError('email', fieldErrors) && (
-            <div className="field-error">
-              {getFirstFieldError('email', fieldErrors)}
-            </div>
-          )}
+    <AuthLayout>
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        align="center"
+        sx={{ fontWeight: 'bold' }}
+      >
+        onemployment
+      </Typography>
 
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            aria-invalid={Boolean(getFirstFieldError('password', fieldErrors))}
-          />
-          {getFirstFieldError('password', fieldErrors) && (
-            <div className="field-error">
-              {getFirstFieldError('password', fieldErrors)}
-            </div>
-          )}
+      <Box component="form" onSubmit={onSubmit} noValidate>
+        <FormField
+          name="email"
+          type="email"
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fieldErrors={
+            getFirstFieldError('email', fieldErrors)
+              ? [getFirstFieldError('email', fieldErrors) as string]
+              : undefined
+          }
+          autoComplete="email"
+          required
+        />
 
-          {formError && <div className="field-error">{formError}</div>}
+        <FormField
+          name="password"
+          type="password"
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          fieldErrors={
+            getFirstFieldError('password', fieldErrors)
+              ? [getFirstFieldError('password', fieldErrors) as string]
+              : undefined
+          }
+          autoComplete="current-password"
+          required
+        />
 
-          <button
-            className="auth-submit-btn"
-            type="submit"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Signing in…' : 'Sign In'}
-          </button>
-        </form>
-        <div className="auth-switch">
-          Don’t have an account? <Link to="/signup">Sign up</Link>
-        </div>
-      </div>
-    </div>
+        {formError && (
+          <Typography color="error" variant="body2" sx={{ mt: 1 }}>
+            {formError}
+          </Typography>
+        )}
+
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          disabled={isLoading}
+          sx={{ mt: 3, mb: 2 }}
+        >
+          {isLoading ? 'Signing in…' : 'Sign In'}
+        </Button>
+
+        <Typography align="center">
+          Don't have an account?{' '}
+          <MuiLink component={Link} to="/signup">
+            Sign up
+          </MuiLink>
+        </Typography>
+      </Box>
+    </AuthLayout>
   );
 }
 
