@@ -160,6 +160,37 @@ export const apiSlice = createApi({
         url: `/api/v1/user/suggest-usernames?username=${encodeURIComponent(username)}`,
       }),
     }),
+
+    uploadResume: builder.mutation<
+      {
+        message: string;
+        resume: {
+          id: string;
+          originalFilename: string;
+          sizeBytes: number;
+          createdAt: string;
+          updatedAt: string;
+        };
+      },
+      File
+    >({
+      query: (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        return {
+          url: '/api/v1/resume/upload',
+          method: 'POST',
+          body: formData,
+        };
+      },
+    }),
+
+    analyzeResume: builder.mutation<{ message: string }, void>({
+      query: () => ({
+        url: '/api/v1/resume/analyze',
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -175,4 +206,6 @@ export const {
   useLazyValidateUsernameQuery,
   useSuggestUsernamesQuery,
   useLazySuggestUsernamesQuery,
+  useUploadResumeMutation,
+  useAnalyzeResumeMutation,
 } = apiSlice;

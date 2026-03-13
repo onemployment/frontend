@@ -9,6 +9,8 @@ import {
   useValidateEmailQuery,
   useValidateUsernameQuery,
   useSuggestUsernamesQuery,
+  useUploadResumeMutation,
+  useAnalyzeResumeMutation,
 } from '../apiSlice';
 
 describe('apiSlice exports (TDD)', () => {
@@ -20,5 +22,13 @@ describe('apiSlice exports (TDD)', () => {
     expect(typeof useValidateEmailQuery).toBe('function');
     expect(typeof useValidateUsernameQuery).toBe('function');
     expect(typeof useSuggestUsernamesQuery).toBe('function');
+  });
+
+  it('exports useUploadResumeMutation', () => {
+    expect(useUploadResumeMutation).toBeDefined();
+  });
+
+  it('exports useAnalyzeResumeMutation', () => {
+    expect(useAnalyzeResumeMutation).toBeDefined();
   });
 });
