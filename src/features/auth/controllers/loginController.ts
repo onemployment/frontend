@@ -24,7 +24,7 @@ export function createLoginSubmit(deps: Deps) {
 
     try {
       await deps.login(sanitized);
-      deps.navigate('/app');
+      deps.navigate('/home');
     } catch (err: unknown) {
       const e = err as {
         status?: number;

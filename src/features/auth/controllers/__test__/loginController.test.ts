@@ -34,7 +34,7 @@ describe('loginController (TDD)', () => {
     await submit({ email: 'user@example.com', password: 'StrongPass123' });
 
     expect(deps.login).toHaveBeenCalled();
-    expect(deps.navigate).toHaveBeenCalledWith('/app');
+    expect(deps.navigate).toHaveBeenCalledWith('/home');
     expect(deps.setFormError).not.toHaveBeenCalled();
   });
 
