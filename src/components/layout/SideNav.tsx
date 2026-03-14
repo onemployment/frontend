@@ -1,9 +1,7 @@
 import { List, ListItemButton, ListItemText, Box } from '@mui/material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const NAV_ITEMS = [
-  { label: 'Resume Builder', path: '/home/resume-builder' },
-];
+const NAV_ITEMS = [{ label: 'Resume Builder', path: '/home/resume-builder' }];
 
 export default function SideNav() {
   const navigate = useNavigate();
@@ -31,7 +29,10 @@ export default function SideNav() {
               '&:hover': { bgcolor: '#1a1a1a' },
             }}
           >
-            <ListItemText primary={item.label} primaryTypographyProps={{ color: '#ffffff' }} />
+            <ListItemText
+              primary={item.label}
+              primaryTypographyProps={{ color: '#ffffff' }}
+            />
           </ListItemButton>
         ))}
       </List>

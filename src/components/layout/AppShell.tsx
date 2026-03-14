@@ -21,7 +21,10 @@ export default function AppShell() {
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <AppBar position="static" elevation={0} sx={{ bgcolor: '#000000' }}>
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold', color: '#ffffff' }}>
+          <Typography
+            variant="h6"
+            sx={{ flexGrow: 1, fontWeight: 'bold', color: '#ffffff' }}
+          >
             onemployment
           </Typography>
           {currentUser && (
@@ -37,7 +40,10 @@ export default function AppShell() {
 
       <Box sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
         <SideNav />
-        <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: 'auto', bgcolor: '#ffffff' }}>
+        <Box
+          component="main"
+          sx={{ flexGrow: 1, p: 3, overflow: 'auto', bgcolor: '#ffffff' }}
+        >
           <Outlet />
         </Box>
       </Box>

@@ -18,7 +18,8 @@ export default function ResumeBuilderPage() {
   const [error, setError] = useState<string | null>(null);
 
   const [uploadResume, { isLoading: isUploading }] = useUploadResumeMutation();
-  const [analyzeResume, { isLoading: isAnalyzing }] = useAnalyzeResumeMutation();
+  const [analyzeResume, { isLoading: isAnalyzing }] =
+    useAnalyzeResumeMutation();
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
@@ -88,7 +89,9 @@ export default function ResumeBuilderPage() {
           variant="contained"
           onClick={handleCreate}
           disabled={!uploadedFilename || isAnalyzing}
-          startIcon={isAnalyzing ? <CircularProgress size={16} color="inherit" /> : null}
+          startIcon={
+            isAnalyzing ? <CircularProgress size={16} color="inherit" /> : null
+          }
         >
           {isAnalyzing ? 'Analyzing…' : 'Create'}
         </Button>
