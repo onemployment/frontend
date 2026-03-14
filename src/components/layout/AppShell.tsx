@@ -19,17 +19,17 @@ export default function AppShell() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <AppBar position="static" color="default" elevation={1}>
+      <AppBar position="static" elevation={0} sx={{ bgcolor: '#000000' }}>
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold', color: '#ffffff' }}>
             onemployment
           </Typography>
           {currentUser && (
-            <Typography variant="body2" sx={{ mr: 2 }}>
+            <Typography variant="body2" sx={{ mr: 2, color: '#ffffff' }}>
               Welcome {currentUser.username}
             </Typography>
           )}
-          <Button onClick={handleLogout} color="inherit">
+          <Button onClick={handleLogout} sx={{ color: '#ffffff' }}>
             Log out
           </Button>
         </Toolbar>
@@ -37,7 +37,7 @@ export default function AppShell() {
 
       <Box sx={{ display: 'flex', flexGrow: 1, overflow: 'hidden' }}>
         <SideNav />
-        <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: 'auto' }}>
+        <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: 'auto', bgcolor: '#ffffff' }}>
           <Outlet />
         </Box>
       </Box>

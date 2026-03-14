@@ -14,10 +14,9 @@ export default function SideNav() {
       sx={{
         width: 220,
         flexShrink: 0,
-        borderRight: '1px solid',
-        borderColor: 'divider',
         height: '100%',
         pt: 1,
+        bgcolor: '#000000',
       }}
     >
       <List disablePadding>
@@ -26,8 +25,13 @@ export default function SideNav() {
             key={item.path}
             selected={location.pathname === item.path}
             onClick={() => navigate(item.path)}
+            sx={{
+              color: '#ffffff',
+              '&.Mui-selected': { bgcolor: '#222222' },
+              '&:hover': { bgcolor: '#1a1a1a' },
+            }}
           >
-            <ListItemText primary={item.label} />
+            <ListItemText primary={item.label} primaryTypographyProps={{ color: '#ffffff' }} />
           </ListItemButton>
         ))}
       </List>
