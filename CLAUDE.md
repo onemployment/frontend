@@ -151,6 +151,10 @@ src/
 - **Bundle Analysis**: Tree shaking and dead code elimination
 - **Performance Monitoring**: Core Web Vitals tracking and optimization
 
+## AI Agent Rules
+
+- **Never add `Co-Authored-By` lines to commit messages.**
+
 ## AI Agent Instructions
 
 ### Before Starting Frontend Development
